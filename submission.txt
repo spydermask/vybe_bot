@@ -1,0 +1,12 @@
+VybeBot: A Telegram bot to monitor token prices and trading volume using the Vybe.xyz API.
+
+Set custom price alerts and get instant 24H volume data for your favorite tokens.
+
+Built with:
+- Telegram Bot API
+- python-telegram-bot
+- aiohttp
+- aiosqlite
+- Vybe.xyz API
+
+Source code, instructions, and dependencies provided.
