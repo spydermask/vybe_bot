@@ -1,12 +1,100 @@
-VybeBot: A Telegram bot to monitor token prices and trading volume using the Vybe.xyz API.
+Submission: Rug Check Telegram Bot
+Overview
+The Rug Check Telegram Bot is a bot designed to help cryptocurrency users monitor tokens for potential risks, set price alerts, and track wallet balances. It leverages the RugCheck API to assess token risk scores, allows users to create price alerts for specific tokens, and fetches wallet balances. This bot also supports interacting with a SQLite database for storing user-specific alerts.
 
-Set custom price alerts and get instant 24H volume data for your favorite tokens.
+Features
+Risk Score Check: Users can check the risk score of a token to assess its potential risks.
 
-Built with:
-- Telegram Bot API
-- python-telegram-bot
-- aiohttp
-- aiosqlite
-- Vybe.xyz API
+Price Alerts: Users can set price alerts for specific tokens, and the bot will notify them when the price hits the set threshold.
 
-Source code, instructions, and dependencies provided.
+Wallet Balance Check: Users can check their wallet balance by providing a Solana wallet address.
+
+User-Friendly Commands: The bot supports simple commands for checking risks, setting alerts, and querying wallet balances.
+
+Bot Commands
+/start: Starts the bot and greets the user.
+
+/alert <token> <price>: Sets an alert for a specific token when the price reaches the specified amount.
+
+/alerts: Displays the user's active alerts.
+
+/risk <token>: Fetches and displays the risk score of a specified token.
+
+/wallet <wallet_address>: Fetches and displays the wallet balance of the provided address.
+
+Setup Instructions
+1. Clone the Repository
+First, clone the repository or download the project files to your local machine.
+
+bash
+Copy code
+git clone <repository_url>
+2. Install Dependencies
+Install the necessary Python dependencies using pip.
+
+bash
+Copy code
+pip install -r requirements.txt
+Make sure to include aiohttp, aiosqlite, python-telegram-bot, and other dependencies.
+
+3. Set Up Environment Variables
+Create a .env file in the project root directory and add the following variables:
+
+env
+Copy code
+RUGCHECK_API_KEY=<your_rugcheck_api_key>
+BOT_TOKEN=<your_telegram_bot_token>
+SOLANAFM_API_KEY=<your_solana_api_key>
+4. Run the Bot
+Once the dependencies are installed and environment variables are set up, run the bot using the following command:
+
+bash
+Copy code
+python rug.py
+The bot should now be running and available for interaction.
+
+5. Interacting with the Bot
+Start the bot by clicking Start or sending the /start command.
+
+Set alerts using the /alert <token> <price> command.
+
+Check the risk score of a token using /risk <token>.
+
+Check your wallet balance by using /wallet <wallet_address>.
+
+Database
+The bot uses an SQLite database (alerts.db) to store user alerts. When a user sets an alert, it is stored in the database for future reference.
+
+Database Schema:
+alerts: This table stores the price alerts set by users.
+
+sql
+Copy code
+CREATE TABLE IF NOT EXISTS alerts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    token TEXT NOT NULL,
+    price REAL NOT NULL
+);
+Logging
+The bot uses Python's logging module to log important events, errors, and statuses. Logs will be displayed in the terminal during bot execution.
+
+Error Handling
+The bot includes error handling for network requests (to the RugCheck API and Solana wallet balance fetch) and database interactions. Users will receive feedback if something goes wrong (e.g., invalid input or network error).
+
+Notes
+The bot checks risk scores and wallet balances asynchronously, using asyncio and aiohttp for efficient network communication.
+
+Users can only set alerts for tokens that are recognized by the RugCheck API.
+
+Alerts will be stored in the database, so users can query or modify them later.
+
+Future Enhancements
+Price Tracking: Notify users when the price of a token changes and hits their set alert price.
+
+Support for Additional Chains: Expand wallet balance checking for other blockchains besides Solana.
+
+Rate Limit Handling: Improve the rate-limiting mechanism for handling more frequent requests.
+
+Conclusion
+This bot offers a simple yet effective way for cryptocurrency users to track token risks, set alerts, and check wallet balances. It utilizes asynchronous programming for efficient API calls and provides a great user experience with minimal delays.
